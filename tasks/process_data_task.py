@@ -1,6 +1,6 @@
+from tasks.task_interface import taskInterface
 
-
-class processDataTask:
+class processDataTask(taskInterface):
 
     def execute(self, input_data, user_id):
         # Process the data

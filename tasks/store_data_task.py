@@ -1,7 +1,8 @@
 from db.db_queries import salary_data_service
 from datetime import datetime
+from tasks.task_interface import taskInterface
 
-class storeDataTask:
+class storeDataTask(taskInterface):
 
     def execute(self, input_data, user_id):
         # Timestamp
