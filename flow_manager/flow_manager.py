@@ -1,7 +1,5 @@
-from tasks import fetch_data_task
-from tasks import process_data_task
-from tasks import store_data_task
 from predefined_task import pre_defined_task_list
+from exception import flowManagerException
 
 class flowManager:
 
@@ -40,7 +38,7 @@ class flowManager:
         total_task_executed = 0
 
         if(current_task_classname == None):
-            raise Exception
+            raise flowManagerException(str(current_task) + " is not defined!")
 
         while(total_task_executed < len(self.tasks)):
             class_instance = current_task_classname()
@@ -56,16 +54,16 @@ class flowManager:
             current_task = self.getNextTask(current_task)
 
             if(current_task == None):
-                raise Exception
+                raise flowManagerException("Intermediate task cannot be None! Ensure task ordering is correct.")
 
             current_task_classname = self.getLinkedClassName(current_task)
 
             if(current_task_classname == None):
-                raise Exception
+                raise flowManagerException(str(current_task) + " is not defined!")
 
-        
+
         if(total_task_executed != len(self.tasks)):
-            raise Exception
+            raise flowManagerException("Task chain has not executed completely! Ensure task ordering is correct.")
 
         
             

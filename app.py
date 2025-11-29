@@ -2,6 +2,7 @@ from db.crud import crud_ops
 from flask import Flask, request, Response
 from flow_manager.flow_manager import flowManager
 import traceback
+from exception import dbException, flowManagerException
 
 
 # Create flask instance
@@ -15,20 +16,19 @@ def flowOperation():
         flow_manager_instance = flowManager(input)
         flow_manager_instance.startSequentialTaskProcessing("user_1256")
 
-        return Response(
-                        response='Task completed successfully',
-                        status=200,
-                        mimetype='application/json'
-        )
+        return Response(response='Task completed successfully!', status=200, mimetype='application/json')
+
+    except (dbException, flowManagerException) as err:
+        # traceback.print_exc()
+        # print(err)
+
+        return Response(response=str(err.message), status=400, mimetype='application/json')
+    
     except Exception as err:
-        traceback.print_exc()
-        print(err)
+        # traceback.print_exc()
+        # print(err)
         
-        return Response(
-                        response='Failed',
-                        status=400,
-                        mimetype='application/json'
-        )
+        return Response(response='Internal Server Error!', status=500, mimetype='application/json')
 
 
 

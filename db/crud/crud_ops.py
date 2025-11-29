@@ -1,5 +1,6 @@
 from db.connection import postgresConnection
-from psycopg2 import sql, Error
+from psycopg2 import sql
+from exception import dbException
 
 class crudOps(postgresConnection):
 
@@ -24,11 +25,12 @@ class crudOps(postgresConnection):
             if(len(results) != 0):
                 return results[0][0]
             else:
-                raise Exception
+                raise dbException("No user data available!")
 
         except Exception as err:
-            print("Fetch failed due to some error")  
+            # print("Fetch failed due to some error")  
             cls.conn.rollback()
+            raise dbException("Fetch user data - failed!")
 
     
     @classmethod
@@ -38,5 +40,6 @@ class crudOps(postgresConnection):
             cls.conn.commit()
 
         except Exception as err:
-            print("Update failed due to some error")  
+            # print("Update failed due to some error")  
             cls.conn.rollback()
+            raise dbException("Update user data - failed!")
