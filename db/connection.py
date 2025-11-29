@@ -1,14 +1,5 @@
 import psycopg2
-
-# Database connection parameters
-
-host = "localhost"
-database= "flow_manager_db"
-user="postgres"
-password="postgres"
-port= "5432" 
-
-
+import config
 
 class postgresConnection:
 
@@ -20,11 +11,11 @@ class postgresConnection:
     def connection(self):
         try:
             self.conn = psycopg2.connect(
-                    dbname=database,
-                    user=user,
-                    password=password,
-                    host=host,
-                    port=port                
+                    dbname=config.database,
+                    user=config.user,
+                    password=config.password,
+                    host=config.host,
+                    port=config.port                
             )
 
             self.cursor = self.conn.cursor()
