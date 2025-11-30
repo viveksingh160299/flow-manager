@@ -1,5 +1,12 @@
 import psycopg2
-import config
+# import config
+import os
+
+database = os.environ.get("DATABASE") 
+user = os.environ.get("USER")
+password = os.environ.get("PASSWORD")
+host = os.environ.get("HOST")
+port = os.environ.get("PORT")
 
 class postgresConnection:
 
@@ -11,11 +18,11 @@ class postgresConnection:
     def connection(self):
         try:
             self.conn = psycopg2.connect(
-                    dbname=config.database,
-                    user=config.user,
-                    password=config.password,
-                    host=config.host,
-                    port=config.port                
+                    dbname=database,
+                    user=user,
+                    password=password,
+                    host=host,
+                    port=port                
             )
 
             self.cursor = self.conn.cursor()

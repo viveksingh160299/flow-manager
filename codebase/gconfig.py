@@ -1,0 +1,9 @@
+bind = '0.0.0.0:8080'
+workers = 2
+timeout = 60
+max_requests = 200
+max_requests_jitter = 50
+accesslog = '/app/access.log'
+errorlog = '/app/error.log'
+loglevel = 'info'
+capture_output = False

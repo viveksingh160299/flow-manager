@@ -1,9 +1,10 @@
 from werkzeug.security import check_password_hash
 import jwt
 from db.db_queries.user_auth_service import userAuthService
-import config
+# import config
 from datetime import datetime, timezone, timedelta
 from exception import authException
+import os
 
 class generateAuthToken:
 
@@ -23,9 +24,10 @@ class generateAuthToken:
         if(not check_password_hash(password_hash, password)):
             raise authException("Incorrect email or password! Please use correct credentials.")
 
+        auth_secret = os.environ.get("AUTH_SECRET") 
         auth_token = jwt.encode({'user_id': self.user_id, 
                                  'exp': datetime.now(timezone.utc) + timedelta(minutes=30)},
-                                 config.auth_secret,
+                                 auth_secret,
                                  algorithm="HS256") 
                   
         return auth_token

@@ -1,8 +1,9 @@
 import jwt
-import config
+# import config
 from exception import authException
 from functools import wraps
 from flask import request, Response
+import os
 
 
 
@@ -24,7 +25,8 @@ def token_required(func):
             if(len(auth_token) == 0):
                 raise authException("Auth token is missing! Please login again.")
 
-            data = jwt.decode(auth_token, config.auth_secret, algorithms=["HS256"])
+            auth_secret = os.environ.get("AUTH_SECRET") 
+            data = jwt.decode(auth_token, auth_secret, algorithms=["HS256"])
 
             return func(data['user_id'])
 

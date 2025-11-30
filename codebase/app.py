@@ -10,6 +10,9 @@ from jwt_auth.token_validation import token_required
 # Create flask instance
 app = Flask(__name__)
 
+# Establish DB connection
+crud_ops.crudOps()
+
 
 
 
@@ -50,13 +53,13 @@ def loginUser():
         return Response(response=auth_token, status=200, mimetype='application/json')
 
     except authException as err:
-        traceback.print_exc()
+        # traceback.print_exc()
         # print(err)
 
         return Response(response=str(err.message), status=400, mimetype='application/json')
     
     except Exception as err:
-        traceback.print_exc()
+        # traceback.print_exc()
         # print(err)
         
         return Response(response='Internal Server Error!', status=500, mimetype='application/json')
@@ -68,8 +71,5 @@ def loginUser():
 
 
 if __name__ == "__main__":
-
-    # Establish DB connection
-    crud_ops.crudOps()
 
     app.run(host='0.0.0.0', port=8080, debug=True)
