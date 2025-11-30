@@ -1,3 +1,21 @@
+### Flow Manager API :-
+The flow manager Api is designed to run tasks in sequential fashion. This is controlled by the flow manager handler. 
+
+
+### Key Highlights about the Api:
+1: The Flow Manager Api is developed using python, flask and postgreSQL.
+2: There are 2 api endpoints: /login endpoint is needed to log user in. /flow-manager is the main endpoint which excutes the task.
+3: The /flow-manager api endpoint is protected by JWT authentication.
+4: The task class is separate from flow manager classes. The task class implements a abstract class(interface) to ensure generic design. 
+5: The generic design of the task classes allows developer to add more tasks and chain them in the api.
+6: To prevent sql injection attack, all the queries are parametrized using psycopg2.
+7: Extensive use of try except to capture failure scenarios and update the api caller about it by only passing what is required. No internal error stack messeges are returned as Response to api caller to ensure security.
+8: A gunicorn web server is added to allow users to make multiple api calls simultaneously.
+9: A very simple logging is implemented by guicorn.
+10: Everything is Dockerized using Podman. Podman is exactly similar to Docker. It has free usage license. 
+11: There are 2 Podman images. One is DB image and other is Flow Manager API image.
+
+
 ### SETUP :- Flow Manager DB container  
 Step 1: Navigate inside the root dir of the PostgreSQL DB folder.  
 Step 2: Create a DB image by running below commands:  
