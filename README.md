@@ -1,6 +1,8 @@
 ### Flow Manager API :-
 The flow manager Api is designed to run tasks in sequential fashion. This is controlled by the flow manager handler. 
   
+
+
   
 ### Key Highlights about the Api:
 1: The Flow Manager Api is developed using python, flask and postgreSQL.  
@@ -14,6 +16,8 @@ The flow manager Api is designed to run tasks in sequential fashion. This is con
 9: A very simple logging is implemented by guicorn.  
 10: Everything is Dockerized using Podman. Podman is exactly similar to Docker. It has free usage license.  
 11: There are 2 Podman images. One is DB image and other is Flow Manager API image.  
+
+
   
   
 ### SETUP :- Flow Manager DB container  
@@ -25,6 +29,8 @@ Step 3: Create DB container from the Podman image.
 Step 4: Ensure DB container is active. Run below command and container should show up in the list.  
 &emsp;&emsp;> podman ps  
   
+
+
   
 ### SETUP :- Flow Manager Api container  
 Step 1: Do a git clone of the repository. Use the main branch.  
@@ -39,6 +45,8 @@ Step 5: Now start Gunicorn web server to start the flow manager application.
 &emsp;&emsp;$ tail -100f ./error.log  
 Step 6: inside error.log file you'll see 2 gunicorn workers up and running.  
 Step 7: Now test the API from Postman.  
+
+
   
   
 ### Testing :- Postman  
