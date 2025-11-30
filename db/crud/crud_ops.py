@@ -22,11 +22,8 @@ class crudOps(postgresConnection):
             
             results = cls.cursor.fetchall()
 
-            if(len(results) != 0):
-                return results[0][0]
-            else:
-                raise dbException("No user data available!")
-
+            return results
+            
         except Exception as err:
             # print("Fetch failed due to some error")  
             cls.conn.rollback()

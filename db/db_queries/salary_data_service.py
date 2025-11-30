@@ -1,4 +1,5 @@
 from db.crud.crud_ops import crudOps
+from exception import dbException
 
 class salaryDataService:
 
@@ -10,7 +11,10 @@ class salaryDataService:
 
         results  = crudOps.fetch(query, self.table_name, (user_id,))
 
-        return results
+        if(len(results) == 0):
+            raise dbException("No user data available!")
+
+        return results[0][0]
 
 
     def updateSalary(self, salary, timestamp, user_id):
